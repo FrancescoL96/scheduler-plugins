@@ -22,6 +22,7 @@ import (
 	"os"
 
 	"github.com/spf13/pflag"
+	"k8s.io/klog/v2"
 	"sigs.k8s.io/scheduler-plugins/cmd/controller/app"
 )
 
@@ -31,6 +32,7 @@ func main() {
 	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
 	pflag.Parse()
 
+	klog.Infof("controller is run")
 	if err := app.Run(options); err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)

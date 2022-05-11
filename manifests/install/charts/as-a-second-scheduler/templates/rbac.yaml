@@ -3,6 +3,9 @@ kind: ClusterRole
 metadata:
   name: scheduler-plugins-scheduler
 rules:
+- apiGroups: ["scheduling.francescol96.univr"]
+  resources: ["realtimes"]
+  verbs: ["get", "list", "watch", "create", "delete", "update", "patch"]  
 - apiGroups: [""]
   resources: ["namespaces"]
   verbs: ["get", "list", "watch"]

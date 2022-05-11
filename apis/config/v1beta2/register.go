@@ -40,8 +40,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&NodeResourcesAllocatableArgs{},
 		&TargetLoadPackingArgs{},
 		&LoadVariationRiskBalancingArgs{},
-		&NodeResourceTopologyMatchArgs{},
 		&PreemptionTolerationArgs{},
+		&RealTimeArgs{},
 	)
 	return nil
 }

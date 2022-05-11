@@ -45,7 +45,11 @@ const (
 )
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+type RealTimeArgs struct {
+	metav1.TypeMeta
+}
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // NodeResourcesAllocatableArgs holds arguments used to configure NodeResourcesAllocatable plugin.
 type NodeResourcesAllocatableArgs struct {
 	metav1.TypeMeta `json:",inline"`
@@ -136,16 +140,6 @@ type ScoringStrategy struct {
 	// Resources a list of pairs <resource, weight> to be considered while scoring
 	// allowed weights start from 1.
 	Resources []schedconfig.ResourceSpec
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// NodeResourceTopologyMatchArgs holds arguments used to configure the NodeResourceTopologyMatch plugin
-type NodeResourceTopologyMatchArgs struct {
-	metav1.TypeMeta
-
-	// ScoringStrategy a scoring model that determine how the plugin will score the nodes.
-	ScoringStrategy ScoringStrategy
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

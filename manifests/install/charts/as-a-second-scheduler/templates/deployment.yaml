@@ -15,11 +15,13 @@ spec:
       labels:
         app: scheduler-plugins-controller
     spec:
+      imagePullSecrets:
+      - name: gitlab-rt-tests
       serviceAccount: scheduler-plugins-controller
       containers:
       - name: scheduler-plugins-controller
         image: {{ .Values.controller.image }}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -38,24 +40,29 @@ spec:
       labels:
         component: scheduler
     spec:
+      imagePullSecrets:
+      - name: gitlab-rt-tests
       serviceAccountName: scheduler-plugins-scheduler
       containers:
       - command:
         - /bin/kube-scheduler
-        - --address=0.0.0.0
+        - --bind-address=0.0.0.0
         - --leader-elect=false
         - --config=/etc/kubernetes/scheduler-config.yaml
         image: {{ .Values.scheduler.image }}
+        imagePullPolicy: Always
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 10251
+            scheme: HTTPS
+            port: 10259
           initialDelaySeconds: 15
         name: scheduler-plugins-scheduler
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 10251
+            scheme: HTTPS
+            port: 10259
         resources:
           requests:
             cpu: '0.1'

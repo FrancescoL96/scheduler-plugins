@@ -66,11 +66,6 @@ var (
 	DefaultMetricProviderType = KubernetesMetricsServer
 	// DefaultInsecureSkipVerify is whether to skip the certificate verification
 	DefaultInsecureSkipVerify = true
-
-	defaultResourceSpec = []schedulerconfigv1beta3.ResourceSpec{
-		{Name: string(v1.ResourceCPU), Weight: 1},
-		{Name: string(v1.ResourceMemory), Weight: 1},
-	}
 )
 
 // SetDefaults_CoschedulingArgs sets the default parameters for Coscheduling plugin.
@@ -127,27 +122,6 @@ func SetDefaults_LoadVariationRiskBalancingArgs(args *LoadVariationRiskBalancing
 	}
 	if args.MetricProvider.Type == Prometheus && args.MetricProvider.InsecureSkipVerify == nil {
 		args.MetricProvider.InsecureSkipVerify = &DefaultInsecureSkipVerify
-	}
-}
-
-// SetDefaults_NodeResourceTopologyMatchArgs sets the default parameters for NodeResourceTopologyMatch plugin.
-func SetDefaults_NodeResourceTopologyMatchArgs(obj *NodeResourceTopologyMatchArgs) {
-	if obj.ScoringStrategy == nil {
-		obj.ScoringStrategy = &ScoringStrategy{
-			Type:      LeastAllocated,
-			Resources: defaultResourceSpec,
-		}
-	}
-
-	if len(obj.ScoringStrategy.Resources) == 0 {
-		// If no resources specified, use the default set.
-		obj.ScoringStrategy.Resources = append(obj.ScoringStrategy.Resources, defaultResourceSpec...)
-	}
-
-	for i := range obj.ScoringStrategy.Resources {
-		if obj.ScoringStrategy.Resources[i].Weight == 0 {
-			obj.ScoringStrategy.Resources[i].Weight = 1
-		}
 	}
 }
 

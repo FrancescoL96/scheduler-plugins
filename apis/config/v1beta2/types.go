@@ -23,7 +23,11 @@ import (
 )
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+type RealTimeArgs struct {
+	metav1.TypeMeta `json:",inline"`
+}
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // CoschedulingArgs defines the scheduling parameters for Coscheduling plugin.
 type CoschedulingArgs struct {
 	metav1.TypeMeta `json:",inline"`
@@ -131,15 +135,6 @@ const (
 type ScoringStrategy struct {
 	Type      ScoringStrategyType                   `json:"type,omitempty"`
 	Resources []schedulerconfigv1beta2.ResourceSpec `json:"resources,omitempty"`
-}
-
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// NodeResourceTopologyMatchArgs holds arguments used to configure the NodeResourceTopologyMatch plugin
-type NodeResourceTopologyMatchArgs struct {
-	metav1.TypeMeta `json:",inline"`
-
-	ScoringStrategy *ScoringStrategy `json:"scoringStrategy,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

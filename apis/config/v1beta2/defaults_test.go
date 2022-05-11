@@ -137,16 +137,6 @@ func TestSchedulingDefaults(t *testing.T) {
 			},
 		},
 		{
-			name:   "empty config NodeResourceTopologyMatchArgs",
-			config: &NodeResourceTopologyMatchArgs{},
-			expect: &NodeResourceTopologyMatchArgs{
-				ScoringStrategy: &ScoringStrategy{
-					Type:      LeastAllocated,
-					Resources: defaultResourceSpec,
-				},
-			},
-		},
-		{
 			name:   "empty config PreeemptionTolerationArgs",
 			config: &PreemptionTolerationArgs{},
 			expect: &PreemptionTolerationArgs{
