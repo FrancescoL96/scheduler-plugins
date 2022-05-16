@@ -105,7 +105,7 @@ func GetResourcesDynamically(dynamic dynamic.Interface, ctx context.Context, gro
 		Version:  version,
 		Resource: resource,
 	}
-	time.Sleep(time.Duration(1) * time.Second) // Wait for CRD to be created
+	time.Sleep(time.Duration(1) * time.Second)
 	list, err := dynamic.Resource(resourceId).Namespace(namespace).List(ctx, metav1.ListOptions{})
 	if err != nil {
 		return nil, err
@@ -186,7 +186,7 @@ func GetRealTimeData(ctx context.Context, pod *v1.Pod) (RealTimeData, error) {
 			}
 		}
 	}
-	return RealTimeData{Criticality: "N"}, errors.New("GetRealTimeData: something went wrong: final return")
+	return RealTimeData{Criticality: "N"}, errors.New("GetRealTimeData: no matching realtime objects found; kindly check the labels")
 }
 
 // Filter invoked at the filter extension point.

@@ -29,34 +29,5 @@ import (
 // Public to allow building arbitrary schemes.
 // All generated defaulters are covering - they call all nested defaulters.
 func RegisterDefaults(scheme *runtime.Scheme) error {
-	scheme.AddTypeDefaultingFunc(&CoschedulingArgs{}, func(obj interface{}) { SetObjectDefaults_CoschedulingArgs(obj.(*CoschedulingArgs)) })
-	scheme.AddTypeDefaultingFunc(&LoadVariationRiskBalancingArgs{}, func(obj interface{}) {
-		SetObjectDefaults_LoadVariationRiskBalancingArgs(obj.(*LoadVariationRiskBalancingArgs))
-	})
-	scheme.AddTypeDefaultingFunc(&NodeResourcesAllocatableArgs{}, func(obj interface{}) {
-		SetObjectDefaults_NodeResourcesAllocatableArgs(obj.(*NodeResourcesAllocatableArgs))
-	})
-	scheme.AddTypeDefaultingFunc(&PreemptionTolerationArgs{}, func(obj interface{}) { SetObjectDefaults_PreemptionTolerationArgs(obj.(*PreemptionTolerationArgs)) })
-	scheme.AddTypeDefaultingFunc(&TargetLoadPackingArgs{}, func(obj interface{}) { SetObjectDefaults_TargetLoadPackingArgs(obj.(*TargetLoadPackingArgs)) })
 	return nil
-}
-
-func SetObjectDefaults_CoschedulingArgs(in *CoschedulingArgs) {
-	SetDefaults_CoschedulingArgs(in)
-}
-
-func SetObjectDefaults_LoadVariationRiskBalancingArgs(in *LoadVariationRiskBalancingArgs) {
-	SetDefaults_LoadVariationRiskBalancingArgs(in)
-}
-
-func SetObjectDefaults_NodeResourcesAllocatableArgs(in *NodeResourcesAllocatableArgs) {
-	SetDefaults_NodeResourcesAllocatableArgs(in)
-}
-
-func SetObjectDefaults_PreemptionTolerationArgs(in *PreemptionTolerationArgs) {
-	SetDefaults_PreemptionTolerationArgs(in)
-}
-
-func SetObjectDefaults_TargetLoadPackingArgs(in *TargetLoadPackingArgs) {
-	SetDefaults_TargetLoadPackingArgs(in)
 }
